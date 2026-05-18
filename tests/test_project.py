@@ -1,11 +1,14 @@
 import sys
 from pathlib import Path
 
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from main import calculate_average
 from main import check_memory_answer
 from main import generate_sequence
+from main import check_stroop_answer
+
 
 
 def test_generate_sequence_length():
@@ -49,3 +52,14 @@ def test_check_memory_answer_correct():
 
 def test_check_memory_answer_incorrect():
     assert check_memory_answer("1 2 4", ["1", "2", "3"]) is False
+
+def test_check_stroop_answer_correct():
+    assert check_stroop_answer("red", "red") is True
+
+
+def test_check_stroop_answer_correct_with_spaces_and_caps():
+    assert check_stroop_answer(" RED ", "red") is True
+
+
+def test_check_stroop_answer_incorrect():
+    assert check_stroop_answer("blue", "red") is False
